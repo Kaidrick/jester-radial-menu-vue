@@ -14,6 +14,7 @@
                :inactive-value="false"
                :active-text="'中'"
                :inactive-text="'英'" />
+    <img id="JuiCategory" src="../assets/jester_ui_category_icons.png">
     <img v-for="(image, index) in icons"
          :id="image.name"
          :key="index"
@@ -81,8 +82,6 @@ export default {
         timer: '',
         distance: '',
       };
-
-      console.log(menu_data.states.a2g)
 
       this.canvas = document.getElementById('canvas');
       this.ctx = this.canvas.getContext('2d');
@@ -178,8 +177,12 @@ export default {
             if (Array.isArray(this.currentMenu[index].a)) {
               let startY = refY - this.currentMenu[index].a.length * 18 + 25;
 
-              let image = document.getElementById(this.currentMenu[index].category.toLowerCase());
-              this.ctx.drawImage(image, refX - 24, startY - 48, 48, 48);
+              let image = document.getElementById('JuiCategory');
+
+              let category = this.currentMenu[index].category;
+              let crop = menu_data.categories.find(f => f.name === category.toLowerCase());
+
+              this.ctx.drawImage(image, crop.startX, crop.startY, crop.sizeX, crop.sizeY, refX - 24, startY - 48, 48, 48);
 
               this.currentMenu[index].a.forEach(line => {
                 this.ctx.fillText(line, refX, startY += 20);
@@ -194,8 +197,15 @@ export default {
               this.ctx.fillText(menu_data.static.category[raw], refX, refY + 50);
 
             } else {
-              let image = document.getElementById(this.currentMenu[index].category.toLowerCase());
-              this.ctx.drawImage(image, refX - 24, refY - 58, 48, 48);
+              let image = document.getElementById('JuiCategory');
+
+              let category = this.currentMenu[index].category;
+              let crop = menu_data.categories.find(f => f.name === category.toLowerCase());
+
+              this.ctx.drawImage(image, crop.startX, crop.startY, crop.sizeX, crop.sizeY, refX - 24, refY - 58, 48, 48);
+
+
+              // this.ctx.drawImage(image, refX - 24, refY - 58, 48, 48);
 
               this.ctx.fillText(this.currentMenu[index].a || this.currentMenu[index].name, refX, refY + 10);
 
@@ -211,8 +221,12 @@ export default {
             if (Array.isArray(this.currentMenu[index].name)) {
               let startY = refY - this.currentMenu[index].name.length * 18 + 25;
 
-              let image = document.getElementById(this.currentMenu[index].category.toLowerCase());
-              this.ctx.drawImage(image, refX - 24, startY - 48, 48, 48);
+              let image = document.getElementById('JuiCategory');
+
+              let category = this.currentMenu[index].category;
+              let crop = menu_data.categories.find(f => f.name === category.toLowerCase());
+
+              this.ctx.drawImage(image, crop.startX, crop.startY, crop.sizeX, crop.sizeY, refX - 24, startY - 48, 48, 48);
 
               this.currentMenu[index].name.forEach(line => {
                 this.ctx.fillText(line, refX, startY += 20);
@@ -226,8 +240,12 @@ export default {
               this.ctx.fillText(this.currentMenu[index].category, refX, refY + 50);
 
             } else {
-              let image = document.getElementById(this.currentMenu[index].category.toLowerCase());
-              this.ctx.drawImage(image, refX - 24, refY - 58, 48, 48);
+              let image = document.getElementById('JuiCategory');
+
+              let category = this.currentMenu[index].category;
+              let crop = menu_data.categories.find(f => f.name === category.toLowerCase());
+
+              this.ctx.drawImage(image, crop.startX, crop.startY, crop.sizeX, crop.sizeY, refX - 24, refY - 58, 48, 48);
 
               this.ctx.fillText(this.currentMenu[index].name, refX, refY + 10);
 
@@ -285,15 +303,12 @@ export default {
           this.ctx.fillStyle = 'rgba(0, 0, 0, 0.2)'
           this.ctx.fill();
 
-          console.log(this.contextMenuRemark);
           // plain text or template?
           if (this.contextMenuRemark.includes("|")) {  // template
             // 'a2g | aimMode, pair, fuze, quantity, weaponActive'
             let layout = this.contextMenuRemark.split("|");
             let system = layout[0].trim();
             let values = layout[1].split(",").map(f => f.trim());
-
-            console.log(values.map(f => menu_data.states[system][f]).join(", "));
 
             this.ctx.font = "20px BebasNeue";
             this.ctx.fillStyle = this.contextMenuColor;
@@ -406,7 +421,7 @@ export default {
               }
             }
 
-            console.log(this.contextMenuName, this.contextMenuNameAlias, this.contextMenuNameRaw);
+            // console.log(this.contextMenuName, this.contextMenuNameAlias, this.contextMenuNameRaw);
 
             this.contextMenuColor = menu_data.categories
                 .find(f => f.name === this.currentMenu[targetSection].category.toLowerCase()).color;

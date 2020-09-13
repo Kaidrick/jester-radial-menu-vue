@@ -240,10 +240,10 @@ export default {
             value: 'https://www.flaticon.com/svg/static/icons/svg/2590/2590397.svg',
 
             // icon
-            startX: '',
-            startY: '',
-            sizeX: '',
-            sizeY: '',
+            startX: 6,
+            startY: 7,
+            sizeX: 50,
+            sizeY: 50,
 
             // color
             color: '#d4c618'
@@ -252,10 +252,10 @@ export default {
             name: 'radio',
             value: 'https://www.flaticon.com/svg/static/icons/svg/2590/2590397.svg',
 
-            startX: '',
-            startY: '',
-            sizeX: '',
-            sizeY: '',
+            startX: 326,
+            startY: 7,
+            sizeX: 50,
+            sizeY: 50,
 
             color: '#00acc3'
         },
@@ -263,10 +263,10 @@ export default {
             name: 'weapons',
             value: 'https://www.flaticon.com/svg/static/icons/svg/2590/2590397.svg',
 
-            startX: '',
-            startY: '',
-            sizeX: '',
-            sizeY: '',
+            startX: 262,
+            startY: 7,
+            sizeX: 50,
+            sizeY: 50,
 
             color: '#fd9201'
         },
@@ -274,10 +274,10 @@ export default {
             name: 'defensive',
             value: 'https://www.flaticon.com/svg/static/icons/svg/2590/2590397.svg',
 
-            startX: '',
-            startY: '',
-            sizeX: '',
-            sizeY: '',
+            startX: 198,
+            startY: 7,
+            sizeX: 50,
+            sizeY: 50,
 
             color: '#49c601'
         },
@@ -285,10 +285,10 @@ export default {
             name: 'utility',
             value: 'https://www.flaticon.com/svg/static/icons/svg/2590/2590397.svg',
 
-            startX: '',
-            startY: '',
-            sizeX: '',
-            sizeY: '',
+            startX: 70,
+            startY: 7,
+            sizeX: 50,
+            sizeY: 50,
 
             color: '#3e8df0'
         },
