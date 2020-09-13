@@ -65,7 +65,7 @@ export default {
                     name: 'USE GUARD 243.000',
                     category: 'RADIO',
                     parent: '',
-                    children: [],
+                    // children: [],
                 },
                 {
                     name: 'USE MANUAL 124.000',

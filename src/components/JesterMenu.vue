@@ -413,7 +413,14 @@ export default {
               if (Array.isArray(this.currentMenu[targetSection].name)) {
                 this.contextMenuName = this.currentMenu[targetSection].name.join(" ");  // change menu name first
                 this.contextMenuNameRaw = this.contextMenuName;
-                this.contextMenuNameAlias = this.currentMenu[targetSection].a.join(" ");
+
+                if (this.currentMenu[targetSection].a && Array.isArray(this.currentMenu[targetSection].a)) {
+                  this.contextMenuNameAlias = this.currentMenu[targetSection].a.join(" ") || this.contextMenuName;
+                } else {
+                  this.contextMenuNameAlias = this.contextMenuName;
+                }
+
+
               } else {
                 this.contextMenuName = this.currentMenu[targetSection].name;  // change menu name first
                 this.contextMenuNameRaw = this.contextMenuName;
