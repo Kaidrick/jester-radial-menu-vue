@@ -231,8 +231,6 @@ export default {
 
     iceman: [],
 
-
-    // TODO -> use actually image from game and pair start coordinates and size
     categories: [
         {
             // basic

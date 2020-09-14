@@ -6,23 +6,23 @@
     <div id="preloadFont">Preparing Font</div>
     <canvas id="canvas" @mousemove="handleMouseMove" @mousedown="handleMouseClick"></canvas>
     <div>X: {{ mouseX }}, Y: {{ mouseY }}</div>
-    <div>X: {{ offsetX }}, Y: {{ offsetY }}</div>
-    <div>Angle: {{ trackAngle }}</div>
+<!--    <div>X: {{ offsetX }}, Y: {{ offsetY }}</div>-->
+<!--    <div>Angle: {{ trackAngle }}</div>-->
     <el-switch v-model="translated"
                @change="updateCanvas"
                :active-value="true"
                :inactive-value="false"
                :active-text="'中'"
                :inactive-text="'英'" />
-    <img id="JuiCategory" src="../assets/jester_ui_category_icons.png">
-    <img v-for="(image, index) in icons"
-         :id="image.name"
-         :key="index"
-         :src="image.value"
-         :alt="image.name"
-         width="60"
-         height="60"
-         style="display: none"/>
+    <img id="JuiCategory" src="../assets/jester_ui_category_icons.png" style="display: none">
+<!--    <img v-for="(image, index) in icons"-->
+<!--         :id="image.name"-->
+<!--         :key="index"-->
+<!--         :src="image.value"-->
+<!--         :alt="image.name"-->
+<!--         width="60"-->
+<!--         height="60"-->
+<!--         style="display: none"/>-->
   </div>
 </template>
 
@@ -52,6 +52,9 @@ export default {
 
         cx: 0,
         cy: 0,
+
+        radialInnerRadius: 115,
+        radialOuterRadius: 300,
 
         ctx: { type: CanvasRenderingContext2D },
         canvas: { type: HTMLCanvasElement },
@@ -139,8 +142,8 @@ export default {
 
         this.ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
         this.ctx.beginPath();
-        this.ctx.arc(this.cx, this.cy, 300, centerLineRadian - gap, centerLineRadian + gap);
-        this.ctx.arc(this.cx, this.cy, 116, centerLineRadian + gap, centerLineRadian - gap, true);
+        this.ctx.arc(this.cx, this.cy, this.radialOuterRadius, centerLineRadian - gap, centerLineRadian + gap);
+        this.ctx.arc(this.cx, this.cy, this.radialInnerRadius, centerLineRadian + gap, centerLineRadian - gap, true);
         this.ctx.closePath();
         this.ctx.stroke();
 
@@ -277,7 +280,7 @@ export default {
 
       drawContextDetail() {
         this.ctx.beginPath();
-        this.ctx.arc(this.cx, this.cy, 115, Math.PI / 16, Math.PI - Math.PI / 16);
+        this.ctx.arc(this.cx, this.cy, this.radialInnerRadius, Math.PI / 16, Math.PI - Math.PI / 16);
         this.ctx.closePath();
         this.ctx.fillStyle = 'rgba(0, 0, 0, 0.45)'
         this.ctx.fill();
@@ -327,9 +330,11 @@ export default {
         const halfSector = Math.PI / 8;
         let sectorStartRadian = -Math.PI / 2;
         let currentSectorIndex = this.getCurrentSectorIndex();
+        let clickDistance = this.calcClickDistance(this.cx, this.cy, this.mouseX, this.mouseY)
 
+        // TODO -> draw inner shortcut number mask when drawing the sector frame
         for (let i = 0; i < 8; i++) {
-          if (currentSectorIndex === i) {
+          if (currentSectorIndex === i && clickDistance > this.radialInnerRadius) {
             this.drawOctSector(sectorStartRadian, halfSector, 'rgba(255, 255, 255, 0.1)');
           } else {
             this.drawOctSector(sectorStartRadian, halfSector);
@@ -338,8 +343,6 @@ export default {
           this.drawText(sectorStartRadian, halfSector, i);
           sectorStartRadian += 2 * halfSector;
         }
-
-        // TODO -> draw inner shortcut number mask
       },
 
       handleMouseMove({ layerX, layerY }) {
@@ -367,15 +370,25 @@ export default {
 
       },
 
+      /**
+       *
+       * @param event the mouse click event that can be used to acquire click position
+       *
+       * When handling click event, first check click button:
+       * - a left button should always initiate a switch menu action, if criteria are met, switch to target menu
+       * - a right button should have two mode: 1. go back one step; 2. go back to main menu
+       *
+       * The criteria for left click action is that the distance between click position and menu center should be
+       * larger than the inner circle radius.
+       */
       handleMouseClick(event) {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
 
         // TODO -> reset mode or go back mode?
 
-        if(event.button === 2) {
-          // reset
-          this.currentMenu = this.commandMenu;
+        if(event.button === 2) {  // right click
+          this.currentMenu = this.commandMenu;  // reset to main menu
 
           if (this.translated) {
             this.contextMenuName = menu_data.static.mainMenu;
@@ -388,54 +401,58 @@ export default {
 
           this.contextMenuColor = '#fd9201';
           this.contextMenuRemark = '';
-        } else if (event.button === 0) {
-          // decide which index menu to go
-          // let sectorStartRadian = -Math.PI / 2;
-          let check = this.trackAngle + Math.PI * 1.25;
-          let targetSection = Math.floor(check / (Math.PI / 4)) - 1;
-          console.log(`switch to section -> ${targetSection}`);
+        } else if (event.button === 0) {  // left click
 
-          if (this.currentMenu.length > targetSection &&
-              this.currentMenu[targetSection].children &&
-              this.currentMenu[targetSection].children.length > 0) {
+          // if click distance is less than inner circle radius
+          if (this.calcClickDistance(this.cx, this.cy, event.layerX, event.layerY) > this.radialInnerRadius) {
+            // decide which index menu to go
+            // let sectorStartRadian = -Math.PI / 2;
+            let check = this.trackAngle + Math.PI * 1.25;
+            let targetSection = Math.floor(check / (Math.PI / 4)) - 1;
+            console.log(`switch to section -> ${targetSection}`);
 
-            if (this.translated) {
-              if (Array.isArray(this.currentMenu[targetSection].a)) {
-                this.contextMenuName = this.currentMenu[targetSection].a.join(" ");  // change menu name first
-                this.contextMenuNameRaw = this.currentMenu[targetSection].name.join(" ");
-                this.contextMenuNameAlias = this.contextMenuName;
-              } else {
-                this.contextMenuName = this.currentMenu[targetSection].a || this.currentMenu[targetSection].name;  // change menu name first
-                this.contextMenuNameRaw = this.currentMenu[targetSection].name;
-                this.contextMenuNameAlias = this.contextMenuName;
-              }
-            } else {
-              if (Array.isArray(this.currentMenu[targetSection].name)) {
-                this.contextMenuName = this.currentMenu[targetSection].name.join(" ");  // change menu name first
-                this.contextMenuNameRaw = this.contextMenuName;
+            if (this.currentMenu.length > targetSection &&
+                this.currentMenu[targetSection].children &&
+                this.currentMenu[targetSection].children.length > 0) {
 
-                if (this.currentMenu[targetSection].a && Array.isArray(this.currentMenu[targetSection].a)) {
-                  this.contextMenuNameAlias = this.currentMenu[targetSection].a.join(" ") || this.contextMenuName;
+              if (this.translated) {
+                if (Array.isArray(this.currentMenu[targetSection].a)) {
+                  this.contextMenuName = this.currentMenu[targetSection].a.join(" ");  // change menu name first
+                  this.contextMenuNameRaw = this.currentMenu[targetSection].name.join(" ");
+                  this.contextMenuNameAlias = this.contextMenuName;
                 } else {
+                  this.contextMenuName = this.currentMenu[targetSection].a || this.currentMenu[targetSection].name;  // change menu name first
+                  this.contextMenuNameRaw = this.currentMenu[targetSection].name;
                   this.contextMenuNameAlias = this.contextMenuName;
                 }
-
-
               } else {
-                this.contextMenuName = this.currentMenu[targetSection].name;  // change menu name first
-                this.contextMenuNameRaw = this.contextMenuName;
-                this.contextMenuNameAlias = this.currentMenu[targetSection].a || this.contextMenuName;
+                if (Array.isArray(this.currentMenu[targetSection].name)) {
+                  this.contextMenuName = this.currentMenu[targetSection].name.join(" ");  // change menu name first
+                  this.contextMenuNameRaw = this.contextMenuName;
+
+                  if (this.currentMenu[targetSection].a && Array.isArray(this.currentMenu[targetSection].a)) {
+                    this.contextMenuNameAlias = this.currentMenu[targetSection].a.join(" ") || this.contextMenuName;
+                  } else {
+                    this.contextMenuNameAlias = this.contextMenuName;
+                  }
+
+
+                } else {
+                  this.contextMenuName = this.currentMenu[targetSection].name;  // change menu name first
+                  this.contextMenuNameRaw = this.contextMenuName;
+                  this.contextMenuNameAlias = this.currentMenu[targetSection].a || this.contextMenuName;
+                }
               }
+
+              // console.log(this.contextMenuName, this.contextMenuNameAlias, this.contextMenuNameRaw);
+
+              this.contextMenuColor = menu_data.categories
+                  .find(f => f.name === this.currentMenu[targetSection].category.toLowerCase()).color;
+
+              this.contextMenuRemark = this.currentMenu[targetSection].remark || '';
+
+              this.currentMenu = this.currentMenu[targetSection].children;
             }
-
-            // console.log(this.contextMenuName, this.contextMenuNameAlias, this.contextMenuNameRaw);
-
-            this.contextMenuColor = menu_data.categories
-                .find(f => f.name === this.currentMenu[targetSection].category.toLowerCase()).color;
-
-            this.contextMenuRemark = this.currentMenu[targetSection].remark || '';
-
-            this.currentMenu = this.currentMenu[targetSection].children;
           }
         }
 
@@ -464,6 +481,10 @@ export default {
         this.drawRingFrame();
 
         this.drawContextDetail();
+      },
+
+      calcClickDistance(x1, y1, x2, y2) {
+        return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
       }
     }
   }
