@@ -510,9 +510,11 @@ export default {
   }
 
   #canvas {
-    /*background: url("https://kaidrick.github.io/DCS-F-14-Flight-Manual-zh-CN/_images/menu.png");*/
-    background-size: 100% 100%;
-    background-color: #2c3e50;
+    background: url("../../src/assets/jui_background.png");
+    background-size: 600px 600px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #323232;
 
     cursor: crosshair;
   }
