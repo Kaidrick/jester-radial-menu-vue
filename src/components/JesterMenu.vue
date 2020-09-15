@@ -5,8 +5,8 @@
        element-loading-background="rgba(0, 0, 0, 0.8)">
     <div id="preloadFont">Preparing Font</div>
     <canvas id="canvas" @mousemove="handleMouseMove" @mousedown="handleMouseClick"></canvas>
-    <div>X: {{ mouseX }}, Y: {{ mouseY }}</div>
-<!--    <div>X: {{ offsetX }}, Y: {{ offsetY }}</div>-->
+<!--    <div>X: {{ mouseX }}, Y: {{ mouseY }}</div>-->
+    <div>X: {{ offsetX }}, Y: {{ offsetY }}</div>
 <!--    <div>Angle: {{ trackAngle }}</div>-->
     <el-switch v-model="translated"
                @change="updateCanvas"
@@ -15,6 +15,7 @@
                :active-text="'中'"
                :inactive-text="'英'" />
     <img id="JuiCategory" src="../assets/jester_ui_category_icons.png" style="display: none">
+    <img id="JuiTriangles" src="../assets/jui_triangles.png" style="display: none">
 <!--    <img v-for="(image, index) in icons"-->
 <!--         :id="image.name"-->
 <!--         :key="index"-->
@@ -98,7 +99,7 @@ export default {
       this.canvas.oncontextmenu = function(e) {
         e.preventDefault();
         e.stopPropagation();
-      }
+      };
 
       this.currentMenu = this.commandMenu;
 
@@ -113,10 +114,6 @@ export default {
     },
 
     methods: {
-      toRadians(deg) {
-        return deg * Math.PI / 180
-      },
-
       drawSelectorLine({ layerX, layerY }) {
         this.ctx.beginPath();
         this.ctx.moveTo(this.cx, this.cy);
@@ -145,8 +142,30 @@ export default {
         this.ctx.arc(this.cx, this.cy, this.radialOuterRadius, centerLineRadian - gap, centerLineRadian + gap);
         this.ctx.arc(this.cx, this.cy, this.radialInnerRadius, centerLineRadian + gap, centerLineRadian - gap, true);
         this.ctx.closePath();
-        this.ctx.stroke();
+        // this.ctx.stroke();
 
+        let innerTriangle = document.getElementById('JuiTriangles');
+        let innerTriangleRefX = this.cx + (this.radialInnerRadius - 3) * Math.sin(-centerLineRadian + 2 * gap);
+        let innerTriangleRefY = this.cy + (this.radialInnerRadius - 3) * Math.cos(-centerLineRadian + 2 * gap);
+        this.ctx.save();
+        this.ctx.translate(innerTriangleRefX, innerTriangleRefY);
+        this.ctx.rotate(centerLineRadian + 6 * gap);
+        this.ctx.translate(-innerTriangleRefX, -innerTriangleRefY);
+        this.ctx.drawImage(innerTriangle, 36, 0, 36, 27, innerTriangleRefX - 16, innerTriangleRefY - 16, 27, 20);
+        this.ctx.restore();
+
+        let outerTriangle = document.getElementById('JuiTriangles');
+        let outerTriangleRefX = this.cx + (this.radialOuterRadius) * Math.sin(-centerLineRadian + gap);
+        let outerTriangleRefY = this.cy + (this.radialOuterRadius) * Math.cos(-centerLineRadian + gap);
+        this.ctx.save();
+        this.ctx.translate(outerTriangleRefX, outerTriangleRefY);
+        this.ctx.rotate(centerLineRadian - gap);
+        this.ctx.translate(-outerTriangleRefX, -outerTriangleRefY);
+        this.ctx.drawImage(outerTriangle, 0, 0, 36, 27, outerTriangleRefX - 13, outerTriangleRefY - 16, 27, 20);
+        this.ctx.restore();
+
+
+        // draw highlight mask
         if (color) {
           this.ctx.fillStyle = color;
           this.ctx.fill();
@@ -514,7 +533,7 @@ export default {
     background-size: 600px 600px;
     background-repeat: no-repeat;
     background-position: center;
-    background-color: #323232;
+    background-color: #242424;
 
     cursor: crosshair;
   }
