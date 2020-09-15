@@ -144,16 +144,6 @@ export default {
         this.ctx.closePath();
         // this.ctx.stroke();
 
-        let innerTriangle = document.getElementById('JuiTriangles');
-        let innerTriangleRefX = this.cx + (this.radialInnerRadius - 3) * Math.sin(-centerLineRadian + 2 * gap);
-        let innerTriangleRefY = this.cy + (this.radialInnerRadius - 3) * Math.cos(-centerLineRadian + 2 * gap);
-        this.ctx.save();
-        this.ctx.translate(innerTriangleRefX, innerTriangleRefY);
-        this.ctx.rotate(centerLineRadian + 6 * gap);
-        this.ctx.translate(-innerTriangleRefX, -innerTriangleRefY);
-        this.ctx.drawImage(innerTriangle, 36, 0, 36, 27, innerTriangleRefX - 16, innerTriangleRefY - 16, 27, 20);
-        this.ctx.restore();
-
         let outerTriangle = document.getElementById('JuiTriangles');
         let outerTriangleRefX = this.cx + (this.radialOuterRadius) * Math.sin(-centerLineRadian + gap);
         let outerTriangleRefY = this.cy + (this.radialOuterRadius) * Math.cos(-centerLineRadian + gap);
@@ -195,6 +185,18 @@ export default {
          * if a is missing, use name instead and output a console log message
          */
         if (index < this.currentMenu.length) {
+
+          let innerTriangle = document.getElementById('JuiTriangles');
+          let innerTriangleRefX = this.cx + (this.radialInnerRadius - 3) * Math.sin(-centerLineRadian + 2 * gap);
+          let innerTriangleRefY = this.cy + (this.radialInnerRadius - 3) * Math.cos(-centerLineRadian + 2 * gap);
+          this.ctx.save();
+          this.ctx.translate(innerTriangleRefX, innerTriangleRefY);
+          this.ctx.rotate(centerLineRadian + 6 * gap);
+          this.ctx.translate(-innerTriangleRefX, -innerTriangleRefY);
+          this.ctx.drawImage(innerTriangle, 36, 0, 36, 27, innerTriangleRefX - 16, innerTriangleRefY - 16, 27, 20);
+          this.ctx.restore();
+
+
           if (this.translated) {
             if (Array.isArray(this.currentMenu[index].a)) {
               let startY = refY - this.currentMenu[index].a.length * 18 + 25;
