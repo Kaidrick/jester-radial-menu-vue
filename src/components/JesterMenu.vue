@@ -4,9 +4,13 @@
        element-loading-text="Loading..."
        element-loading-background="rgba(0, 0, 0, 0.8)">
     <div id="preloadFont">Preparing Font</div>
-    <canvas id="canvas" @mousemove="handleMouseMove" @mousedown="handleMouseClick"></canvas>
+    <div id="preloadFontChs">Preparing Font</div>
+    <div>
+      <canvas id="canvas" @mousemove="handleMouseMove" @mousedown="handleMouseClick"></canvas>
+    </div>
+
 <!--    <div>X: {{ mouseX }}, Y: {{ mouseY }}</div>-->
-    <div>X: {{ offsetX }}, Y: {{ offsetY }}</div>
+<!--    <div>X: {{ offsetX }}, Y: {{ offsetY }}</div>-->
 <!--    <div>Angle: {{ trackAngle }}</div>-->
     <el-switch v-model="translated"
                @change="updateCanvas"
@@ -169,7 +173,7 @@ export default {
         // draw option name; if an array is provided, draw array and then add offset then draw again; max 3 lines
         this.ctx.fillStyle = "rgba(255, 255, 255, 1)";
         this.ctx.textAlign = "center";
-        this.ctx.font = "16px Monospace";
+        this.ctx.font = this.translated ? "16px DroidSansFallback" : "16px Trebuchet MS";
 
         let refX = this.cx + 230 * Math.sin(-centerLineRadian + 2 * gap);
         let refY = this.cy + 230 * Math.cos(-centerLineRadian + 2 * gap);
@@ -210,10 +214,10 @@ export default {
 
               this.currentMenu[index].a.forEach(line => {
                 this.ctx.fillText(line, refX, startY += 20);
-              })
+              });
 
               // draw category label
-              this.ctx.font = "12px Monospace";
+              // this.ctx.font = "12px Microsoft YaHei";
               this.ctx.fillStyle = menu_data.categories
                   .find(f => f.name === this.currentMenu[index].category.toLowerCase()).color;
 
@@ -234,7 +238,7 @@ export default {
               this.ctx.fillText(this.currentMenu[index].a || this.currentMenu[index].name, refX, refY + 10);
 
               // draw category label
-              this.ctx.font = "12px Monospace";
+              this.ctx.font = "12px Trebuchet MS";
               this.ctx.fillStyle = menu_data.categories
                   .find(f => f.name === this.currentMenu[index].category.toLowerCase()).color;
 
@@ -254,10 +258,10 @@ export default {
 
               this.currentMenu[index].name.forEach(line => {
                 this.ctx.fillText(line, refX, startY += 20);
-              })
+              });
 
               // draw category label
-              this.ctx.font = "12px Monospace";
+              this.ctx.font = "12px Trebuchet MS";
               this.ctx.fillStyle = menu_data.categories
                   .find(f => f.name === this.currentMenu[index].category.toLowerCase()).color;
 
@@ -274,7 +278,7 @@ export default {
               this.ctx.fillText(this.currentMenu[index].name, refX, refY + 10);
 
               // draw category label
-              this.ctx.font = "12px Monospace";
+              this.ctx.font = "12px Trebuchet MS";
               this.ctx.fillStyle = menu_data.categories
                   .find(f => f.name === this.currentMenu[index].category.toLowerCase()).color;
 
@@ -283,7 +287,7 @@ export default {
           }
 
           // draw keyboard number shortcut
-          this.ctx.font = "32px Monospace";
+          this.ctx.font = this.translated ? "32px DroidSansFallback" : "32px Trebuchet MS";
           refX = this.cx + 145 * Math.sin(-centerLineRadian + 2 * gap);
           refY = this.cy + 145 * Math.cos(-centerLineRadian + 2 * gap);
           this.ctx.fillText(index + 1,
@@ -291,7 +295,7 @@ export default {
 
 
           // draw press label
-          this.ctx.font = "10px Monospace";
+          this.ctx.font = "10px Trebuchet MS";
           refX = this.cx + 145 * Math.sin(-centerLineRadian + 2 * gap);
           refY = this.cy + 145 * Math.cos(-centerLineRadian + 2 * gap);
           this.ctx.fillText(this.translated ? menu_data.static.press : 'PRESS',
@@ -307,7 +311,7 @@ export default {
         this.ctx.fill();
 
         // always draw JESTER or ICEMAN text in the center
-        this.ctx.font = "bold 42px Monospace";
+        this.ctx.font = this.translated ? "bold 42px DroidSansFallback" : "bold 42px Trebuchet MS";
         this.ctx.fillStyle = "rgba(255, 255, 255, 0.7)";
         this.ctx.fillText('JESTER', this.cx, this.cy + 60);
 
@@ -351,7 +355,7 @@ export default {
         const halfSector = Math.PI / 8;
         let sectorStartRadian = -Math.PI / 2;
         let currentSectorIndex = this.getCurrentSectorIndex();
-        let clickDistance = this.calcClickDistance(this.cx, this.cy, this.mouseX, this.mouseY)
+        let clickDistance = this.calcClickDistance(this.cx, this.cy, this.mouseX, this.mouseY);
 
         // TODO -> draw inner shortcut number mask when drawing the sector frame
         for (let i = 0; i < 8; i++) {
@@ -379,7 +383,7 @@ export default {
         let fY = this.offsetX * Math.sin(rotateAngle) + this.offsetY * Math.cos(rotateAngle);
 
         this.offsetX = fX;
-        this.offsetY = fY
+        this.offsetY = fY;
 
         this.trackAngle = Math.atan2(this.offsetY, this.offsetX);
 
@@ -522,8 +526,23 @@ export default {
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
   }
 
+  @font-face {
+    font-family: 'DroidSansFallback';
+    font-style: normal;
+    src: local('DroidSansFallback'),
+    url("../assets/fonts/DroidSansFallback.ttf");
+  }
+
   #preloadFont {
     font-family: BebasNeue, sans-serif;
+    opacity:0;
+    height:0;
+    width:0;
+    display:inline-block;
+  }
+
+  #preloadFontChs {
+    font-family: DroidSansFallback, serif;
     opacity:0;
     height:0;
     width:0;
