@@ -22,6 +22,10 @@ class Stack {
             return this.data.pop(); // removes the last element
         }
     }
+    clear() {
+        this.data = [];
+        this.top = 0;
+    }
     print() {
         let top = this.top - 1; // because top points to index where new element to be inserted
         while(top >= 0) { // print upto 0th index

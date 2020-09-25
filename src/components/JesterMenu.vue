@@ -508,6 +508,9 @@ export default {
           else {  // click distance is within the inner circle radius, reset go back to main menu
             this.currentMenu = this.commandMenu;  // reset to main menu
 
+            this.menuStack.clear();
+            this.menuNameStack.clear();
+
             if (this.translated) {
               this.contextMenuName = menu_data.static.mainMenu;
             } else {
