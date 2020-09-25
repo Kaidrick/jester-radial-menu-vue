@@ -33,6 +33,7 @@
 
 <script>
 import menu_data from '@/components/menu_data'
+import Stack from '../stack'
 
 export default {
 
@@ -75,7 +76,10 @@ export default {
 
         commandMenu: menu_data.jester,
         
-        icons: menu_data.categories
+        icons: menu_data.categories,
+
+        menuStack: new Stack(),
+        menuNameStack: new Stack()
       }
     },
 
@@ -409,24 +413,40 @@ export default {
       handleMouseClick(event) {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-
-        // TODO -> reset mode or go back mode?
-
         if(event.button === 2) {  // right click
-          this.currentMenu = this.commandMenu;  // reset to main menu
+          const previousMenu = this.menuStack.pop();
+          const previousMenuName = this.menuNameStack.pop();
 
-          if (this.translated) {
-            this.contextMenuName = menu_data.static.mainMenu;
-          } else {
-            this.contextMenuName = 'Main Menu';
+          if (previousMenu) {
+            if (this.menuStack.length() === 0) {  // back to main menu
+              if (this.translated) {
+                this.contextMenuName = menu_data.static.mainMenu;
+              } else {
+                this.contextMenuName = 'Main Menu';
+              }
+
+              this.contextMenuNameRaw = 'Main Menu';
+              this.contextMenuNameAlias = menu_data.static.mainMenu;
+
+              this.contextMenuColor = '#fd9201';
+              this.contextMenuRemark = '';
+            } else {  // get previous menu name
+
+              if (this.translated) {
+                this.contextMenuName = String(previousMenuName.alias);
+                this.contextMenuNameRaw = String(previousMenuName.raw);
+                this.contextMenuNameAlias = String(previousMenuName.alias);
+              } else {
+                this.contextMenuName = String(previousMenuName.name);
+                this.contextMenuNameAlias = String(previousMenuName.alias);
+                this.contextMenuNameRaw = String(previousMenuName.raw);
+              }
+            }
+
+            this.currentMenu = previousMenu;  // reset to main menu
           }
-
-          this.contextMenuNameRaw = 'Main Menu';
-          this.contextMenuNameAlias = menu_data.static.mainMenu;
-
-          this.contextMenuColor = '#fd9201';
-          this.contextMenuRemark = '';
-        } else if (event.button === 0) {  // left click
+        }
+        else if (event.button === 0) {  // left click
 
           // if click distance is less than inner circle radius
           if (this.calcClickDistance(this.cx, this.cy, event.layerX, event.layerY) > this.radialInnerRadius) {
@@ -438,7 +458,15 @@ export default {
 
             if (this.currentMenu.length > targetSection &&
                 this.currentMenu[targetSection].children &&
-                this.currentMenu[targetSection].children.length > 0) {
+                this.currentMenu[targetSection].children.length > 0) {  // confirm switch context menu
+
+              // push current menu and names into stack
+              this.menuStack.push(this.currentMenu);  // push current context menu into stack
+              this.menuNameStack.push({
+                raw: this.contextMenuNameRaw,
+                alias: this.contextMenuNameAlias,
+                name: this.contextMenuName
+              })// push current menu names into stack
 
               if (this.translated) {
                 if (Array.isArray(this.currentMenu[targetSection].a)) {
@@ -469,15 +497,28 @@ export default {
                 }
               }
 
-              // console.log(this.contextMenuName, this.contextMenuNameAlias, this.contextMenuNameRaw);
-
               this.contextMenuColor = menu_data.categories
                   .find(f => f.name === this.currentMenu[targetSection].category.toLowerCase()).color;
 
               this.contextMenuRemark = this.currentMenu[targetSection].remark || '';
 
               this.currentMenu = this.currentMenu[targetSection].children;
+            }  // else empty, do nothing
+          }
+          else {  // click distance is within the inner circle radius, reset go back to main menu
+            this.currentMenu = this.commandMenu;  // reset to main menu
+
+            if (this.translated) {
+              this.contextMenuName = menu_data.static.mainMenu;
+            } else {
+              this.contextMenuName = 'Main Menu';
             }
+
+            this.contextMenuNameRaw = 'Main Menu';
+            this.contextMenuNameAlias = menu_data.static.mainMenu;
+
+            this.contextMenuColor = '#fd9201';
+            this.contextMenuRemark = '';
           }
         }
 
