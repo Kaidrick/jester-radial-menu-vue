@@ -1767,7 +1767,30 @@ export default {
         },
     ],
 
-    iceman: [],
+    iceman: [
+        {
+            name: 'ICEMAN TEST ITEM 1',
+            a: '河马河马河马',
+            category: 'RADIO',
+            parent: '',
+            children: [
+                {
+                    name: 'ICEMAN TEST SUB-ITEM 1',
+                    a: 'ICEMAN子项目1',
+                    category: 'RADIO',
+                    parent: '',
+                    children: [],
+                },
+            ],
+        },
+        {
+            name: ['ICEMAN HAS A', 'LONG NAME'],
+            a: 'ICEMAN测试',
+            category: 'RADAR',
+            parent: '',
+            children: []
+        },
+    ],
 
     categories: [
         {

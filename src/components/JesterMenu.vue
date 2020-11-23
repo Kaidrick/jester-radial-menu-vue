@@ -12,12 +12,21 @@
 <!--    <div>X: {{ mouseX }}, Y: {{ mouseY }}</div>-->
 <!--    <div>X: {{ offsetX }}, Y: {{ offsetY }}</div>-->
 <!--    <div>Angle: {{ trackAngle }}</div>-->
-    <el-switch v-model="translated"
-               @change="updateCanvas"
-               :active-value="true"
-               :inactive-value="false"
-               :active-text="'中'"
-               :inactive-text="'英'" />
+    <div class="switch-wrapper">
+      <el-switch v-model="translated"
+                 @change="updateCanvas"
+                 :active-value="true"
+                 :inactive-value="false"
+                 :active-text="'中'"
+                 :inactive-text="'英'" />
+      <el-switch v-model="isIceman"
+                 @change="selectAI"
+                 :active-value="true"
+                 :inactive-value="false"
+                 :active-text="'Iceman'"
+                 :inactive-text="'Jester'"/>
+    </div>
+
     <img id="JuiCategory" src="../assets/jester_ui_category_icons.png" style="display: none">
     <img id="JuiTriangles" src="../assets/jui_triangles.png" style="display: none">
 <!--    <img v-for="(image, index) in icons"-->
@@ -43,6 +52,8 @@ export default {
       return {
         isLoading: true,
         // isLoading: false,
+
+        isIceman: false,
 
         // user interface
         translated: true,
@@ -317,7 +328,7 @@ export default {
         // always draw JESTER or ICEMAN text in the center
         this.ctx.font = this.translated ? "bold 42px DroidSansFallback" : "bold 42px Trebuchet MS";
         this.ctx.fillStyle = "rgba(255, 255, 255, 0.7)";
-        this.ctx.fillText('JESTER', this.cx, this.cy + 60);
+        this.ctx.fillText(this.isIceman ? 'ICEMAN' : 'JESTER', this.cx, this.cy + 60);
 
         // draw center current menu name
         this.ctx.font = "20px BebasNeue";
@@ -554,12 +565,44 @@ export default {
 
       calcClickDistance(x1, y1, x2, y2) {
         return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+      },
+
+
+      selectAI() {
+        this.currentMenu = [];
+
+        this.contextMenuName = menu_data.static.mainMenu;
+        this.contextMenuColor = '#fd9201';
+        this.contextMenuRemark = '';
+
+        this.contextMenuNameAlias = menu_data.static.mainMenu;
+        this.contextMenuNameRaw = 'Main Menu';
+
+        this.commandMenu = menu_data.jester;
+
+        this.icons = menu_data.categories;
+
+        this.menuStack = new Stack();
+        this.menuNameStack = new Stack();
+
+        this.commandMenu = this.isIceman ? menu_data.iceman : menu_data.jester;
+        this.currentMenu = this.commandMenu;
+
+        this.updateCanvas();
       }
     }
   }
 </script>
 
 <style lang="css">
+  .switch-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .switch-wrapper > div.el-switch {
+    margin: 5px auto;
+  }
 
   /* radial menu context remark */
   @font-face {
