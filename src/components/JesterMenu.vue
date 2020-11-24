@@ -335,8 +335,8 @@ export default {
         this.ctx.beginPath();
         this.ctx.arc(this.cx, this.cy, this.radialInnerRadius, Math.PI / 16, Math.PI - Math.PI / 16);
         this.ctx.closePath();
-        this.ctx.fillStyle = 'rgba(0, 0, 0, 0.45)'
-        this.ctx.fill();
+        // this.ctx.fillStyle = 'rgba(0, 0, 0, 0.15)';
+        // this.ctx.fill();
 
         // always draw JESTER or ICEMAN text in the center
         this.ctx.font = this.translated ? "bold 42px DroidSansFallback" : "bold 42px Trebuchet MS";
