@@ -6,7 +6,7 @@
     <div id="preloadFont">Preparing Font</div>
     <div id="preloadFontChs">Preparing Font</div>
     <div>
-      <canvas id="canvas" @mousemove="handleMouseMove" @mousedown="handleMouseClick"></canvas>
+      <canvas id="canvas" :class="{'jester': !isIceman, 'iceman': isIceman}" @mousemove="handleMouseMove" @mousedown="handleMouseClick"></canvas>
     </div>
 
 <!--    <div>X: {{ mouseX }}, Y: {{ mouseY }}</div>-->
@@ -205,6 +205,10 @@ export default {
          */
         if (index < this.currentMenu.length) {
 
+          if (this.currentMenu[index].name === '_blank') {
+            return;
+          }
+
           let innerTriangle = document.getElementById('JuiTriangles');
           let innerTriangleRefX = this.cx + (this.radialInnerRadius - 3) * Math.sin(-centerLineRadian + 2 * gap);
           let innerTriangleRefY = this.cy + (this.radialInnerRadius - 3) * Math.cos(-centerLineRadian + 2 * gap);
@@ -215,37 +219,41 @@ export default {
           this.ctx.drawImage(innerTriangle, 36, 0, 36, 27, innerTriangleRefX - 16, innerTriangleRefY - 16, 27, 20);
           this.ctx.restore();
 
-
           if (this.translated) {
             if (Array.isArray(this.currentMenu[index].a)) {
               let startY = refY - this.currentMenu[index].a.length * 18 + 25;
 
               let image = document.getElementById('JuiCategory');
 
-              let category = this.currentMenu[index].category;
+              let category = this.currentMenu[index].category || '';
               let crop = menu_data.categories.find(f => f.name === category.toLowerCase());
 
-              this.ctx.drawImage(image, crop.startX, crop.startY, crop.sizeX, crop.sizeY, refX - 24, startY - 48, 48, 48);
+              if (!this.isIceman) {
+                this.ctx.drawImage(image, crop.startX, crop.startY, crop.sizeX, crop.sizeY, refX - 24, startY - 48, 48, 48);
+              }
 
               this.currentMenu[index].a.forEach(line => {
                 this.ctx.fillText(line, refX, startY += 20);
               });
 
               // draw category label
-              // this.ctx.font = "12px Microsoft YaHei";
+              this.ctx.font = "12px Microsoft YaHei";
               this.ctx.fillStyle = menu_data.categories
-                  .find(f => f.name === this.currentMenu[index].category.toLowerCase()).color;
+                  .find(f => f.name === category.toLowerCase()).color;
 
               const raw = this.currentMenu[index].category;
-              this.ctx.fillText(menu_data.static.category[raw], refX, refY + 50);
+              this.ctx.fillText(menu_data.static.category[raw] || '', refX, refY + 50);
 
             } else {
               let image = document.getElementById('JuiCategory');
 
-              let category = this.currentMenu[index].category;
+              let category = this.currentMenu[index].category || '';
               let crop = menu_data.categories.find(f => f.name === category.toLowerCase());
 
-              this.ctx.drawImage(image, crop.startX, crop.startY, crop.sizeX, crop.sizeY, refX - 24, refY - 58, 48, 48);
+              if (!this.isIceman) {
+                this.ctx.drawImage(image, crop.startX, crop.startY, crop.sizeX, crop.sizeY, refX - 24, refY - 58, 48, 48);
+              }
+
 
 
               // this.ctx.drawImage(image, refX - 24, refY - 58, 48, 48);
@@ -255,10 +263,10 @@ export default {
               // draw category label
               this.ctx.font = "12px Trebuchet MS";
               this.ctx.fillStyle = menu_data.categories
-                  .find(f => f.name === this.currentMenu[index].category.toLowerCase()).color;
+                  .find(f => f.name === category.toLowerCase()).color;
 
               const raw = this.currentMenu[index].category;
-              this.ctx.fillText(menu_data.static.category[raw], refX, refY + 30);
+              this.ctx.fillText(menu_data.static.category[raw] || '', refX, refY + 30);
             }
           } else {
             if (Array.isArray(this.currentMenu[index].name)) {
@@ -266,10 +274,12 @@ export default {
 
               let image = document.getElementById('JuiCategory');
 
-              let category = this.currentMenu[index].category;
+              let category = this.currentMenu[index].category || '';
               let crop = menu_data.categories.find(f => f.name === category.toLowerCase());
 
-              this.ctx.drawImage(image, crop.startX, crop.startY, crop.sizeX, crop.sizeY, refX - 24, startY - 48, 48, 48);
+              if (!this.isIceman) {
+                this.ctx.drawImage(image, crop.startX, crop.startY, crop.sizeX, crop.sizeY, refX - 24, startY - 48, 48, 48);
+              }
 
               this.currentMenu[index].name.forEach(line => {
                 this.ctx.fillText(line, refX, startY += 20);
@@ -278,26 +288,29 @@ export default {
               // draw category label
               this.ctx.font = "12px Trebuchet MS";
               this.ctx.fillStyle = menu_data.categories
-                  .find(f => f.name === this.currentMenu[index].category.toLowerCase()).color;
+                  .find(f => f.name === (this.currentMenu[index].category || '').toLowerCase()).color;
 
-              this.ctx.fillText(this.currentMenu[index].category, refX, refY + 50);
+              this.ctx.fillText(this.currentMenu[index].category || '', refX, refY + 50);
 
             } else {
               let image = document.getElementById('JuiCategory');
 
-              let category = this.currentMenu[index].category;
+              let category = this.currentMenu[index].category || '';
               let crop = menu_data.categories.find(f => f.name === category.toLowerCase());
 
-              this.ctx.drawImage(image, crop.startX, crop.startY, crop.sizeX, crop.sizeY, refX - 24, refY - 58, 48, 48);
+              if (!this.isIceman) {
+                this.ctx.drawImage(image, crop.startX, crop.startY, crop.sizeX, crop.sizeY, refX - 24, refY - 58, 48, 48);
+              }
+
 
               this.ctx.fillText(this.currentMenu[index].name, refX, refY + 10);
 
               // draw category label
               this.ctx.font = "12px Trebuchet MS";
               this.ctx.fillStyle = menu_data.categories
-                  .find(f => f.name === this.currentMenu[index].category.toLowerCase()).color;
+                  .find(f => f.name === (this.currentMenu[index].category || '').toLowerCase()).color;
 
-              this.ctx.fillText(this.currentMenu[index].category, refX, refY + 30);
+              this.ctx.fillText(this.currentMenu[index].category || '', refX, refY + 30);
             }
           }
 
@@ -343,7 +356,7 @@ export default {
           this.ctx.arc(this.cx, this.cy, 115, Math.PI - Math.PI / 16, Math.PI);
           // this.ctx.lineTo(this.cx, this.cy);
           this.ctx.closePath();
-          this.ctx.fillStyle = 'rgba(0, 0, 0, 0.2)'
+          this.ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
           this.ctx.fill();
 
           // plain text or template?
@@ -375,7 +388,13 @@ export default {
         // TODO -> draw inner shortcut number mask when drawing the sector frame
         for (let i = 0; i < 8; i++) {
           if (currentSectorIndex === i && clickDistance > this.radialInnerRadius) {
-            this.drawOctSector(sectorStartRadian, halfSector, 'rgba(255, 255, 255, 0.1)');
+            if (this.currentMenu[currentSectorIndex] &&
+                    this.currentMenu[currentSectorIndex].name &&
+                    this.currentMenu[currentSectorIndex].name === '_blank') {
+              this.drawOctSector(sectorStartRadian, halfSector);
+            } else {
+              this.drawOctSector(sectorStartRadian, halfSector, 'rgba(255, 255, 255, 0.1)');
+            }
           } else {
             this.drawOctSector(sectorStartRadian, halfSector);
           }
@@ -477,7 +496,7 @@ export default {
                 raw: this.contextMenuNameRaw,
                 alias: this.contextMenuNameAlias,
                 name: this.contextMenuName
-              })// push current menu names into stack
+              });  // push current menu names into stack
 
               if (this.translated) {
                 if (Array.isArray(this.currentMenu[targetSection].a)) {
@@ -509,7 +528,7 @@ export default {
               }
 
               this.contextMenuColor = menu_data.categories
-                  .find(f => f.name === this.currentMenu[targetSection].category.toLowerCase()).color;
+                  .find(f => f.name === (this.currentMenu[targetSection].category || '').toLowerCase()).color;
 
               this.contextMenuRemark = this.currentMenu[targetSection].remark || '';
 
@@ -636,8 +655,18 @@ export default {
     display:inline-block;
   }
 
-  #canvas {
+  #canvas.jester {
     background: url("../../src/assets/jui_background.png");
+    background-size: 600px 600px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #242424;
+
+    cursor: crosshair;
+  }
+
+  #canvas.iceman {
+    background: url("../../src/assets/jui_background_iceman.png");
     background-size: 600px 600px;
     background-repeat: no-repeat;
     background-position: center;
