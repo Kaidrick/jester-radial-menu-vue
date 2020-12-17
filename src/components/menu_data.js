@@ -51,7 +51,6 @@ export default {
             "DEFENSIVE": "防御",
             "NAVIGATION": "导航",
             "WEAPONS": "武器",
-            "": ""  // empty category for iceman radial menu
         }
     },
 
@@ -420,8 +419,8 @@ export default {
                     ],
                 },
                 {
-                    name: 'SCAN DISTANCE',
-                    a: '扫描距离',
+                    name: 'TID RANGE',
+                    a: 'TID 显示距离',
                     category: 'RADAR',
                     parent: '',
                     children: [
@@ -470,21 +469,28 @@ export default {
                     ],
                 },
                 {
-                    name: 'RADAR MODE',
-                    a: '雷达模式',
+                    name: 'RADAR SETTING',
+                    a: '雷达设置',
                     category: 'RADAR',
                     parent: '',
                     children: [
                         {
                             name: 'AUTO',
-                            a: 'TWS-自动',
+                            a: '自动',
                             category: 'RADAR',
                             parent: '',
                             children: [],
                         },
                         {
-                            name: 'TRACK WHILE SCAN',
-                            a: '边扫描边跟踪',
+                            name: ['TRACK WHILE SCAN', 'AUTO'],
+                            a: ['边扫描边跟踪', '自动'],
+                            category: 'RADAR',
+                            parent: '',
+                            children: [],
+                        },
+						{
+                            name: ['TRACK WHILE SCAN', 'MANUAL'],
+                            a: ['边扫描边跟踪', '手动'],
                             category: 'RADAR',
                             parent: '',
                             children: [],
@@ -496,11 +502,40 @@ export default {
                             parent: '',
                             children: [],
                         },
+						{
+                            name: 'TARGET SIZE SWITCH',
+                            a: '目标大小开关',
+                            category: 'RADAR',
+                            parent: '',
+                            children: [
+								{
+									name: 'NORMAL',
+									a: '正常大小',
+									category: 'RADAR',
+									parent: '',
+									children: [],
+								},
+								{
+									name: 'LARGE',
+									a: '大',
+									category: 'RADAR',
+									parent: '',
+									children: [],
+								},
+								{
+									name: 'SMALL',
+									a: '小',
+									category: 'RADAR',
+									parent: '',
+									children: [],
+								},
+							],
+                        },
                     ],
                 },
                 {
-                    name: 'GROUND STABILIZE',
-                    a: '相对地面稳定',
+                    name: 'TID GROUND STABILIZE',
+                    a: 'TID 相对地面稳定',
                     category: 'RADAR',
                     parent: '',
                     children: [
@@ -1563,7 +1598,7 @@ export default {
                         },
                         {
                             name: ['AIRBORNE', 'INTERCEPTOR'],
-                            a: ['机载雷达'],
+                            a: ['机载截击雷达'],
                             category: 'DEFENSIVE',
                             parent: '',
                             children: [],
@@ -1772,53 +1807,62 @@ export default {
         {
             name: ['SET HEADING', 'RELATIVE'],
             a: ['设置', '相对航向'],
+            category: 'RADIO',
             parent: '',
             children: [
                 {
                     name: ['RIGHT', '5 DEGREES'],
                     a: ['向右', '5 度'],
+                    category: 'RADIO',
                     parent: '',
                     children: [],
                 },
-                {
+				{
                     name: ['RIGHT', '10 DEGREES'],
                     a: ['向右', '10 度'],
+                    category: 'RADIO',
                     parent: '',
                     children: [],
                 },
-                {
+				{
                     name: ['RIGHT', '30 DEGREES'],
                     a: ['向右', '30 度'],
+                    category: 'RADIO',
                     parent: '',
                     children: [],
                 },
-                {
+				{
                     name: ['RIGHT', '45 DEGREES'],
                     a: ['向右', '45 度'],
+                    category: 'RADIO',
                     parent: '',
                     children: [],
                 },
-                {
+				{
                     name: ['LEFT', '45 DEGREES'],
                     a: ['向左', '45 度'],
+                    category: 'RADIO',
                     parent: '',
                     children: [],
                 },
-                {
+				{
                     name: ['LEFT', '30 DEGREES'],
                     a: ['向左', '30 度'],
+                    category: 'RADIO',
                     parent: '',
                     children: [],
                 },
-                {
+				{
                     name: ['LEFT', '10 DEGREES'],
                     a: ['向左', '10 度'],
+                    category: 'RADIO',
                     parent: '',
                     children: [],
                 },
-                {
+				{
                     name: ['LEFT', '5 DEGREES'],
                     a: ['向左', '5 度'],
+                    category: 'RADIO',
                     parent: '',
                     children: [],
                 },
@@ -1827,225 +1871,243 @@ export default {
         {
             name: ['SET HEADING', 'ABSOLUTE'],
             a: ['设置', '绝对航向'],
+            category: 'RADAR',
             parent: '',
             children: [
-                {
+				{
                     name: 'NORTH',
                     a: '北',
+                    category: 'RADIO',
                     parent: '',
                     children: [],
                 },
-                {
+				{
                     name: 'NORTH EAST',
                     a: '东北',
+                    category: 'RADIO',
                     parent: '',
                     children: [],
                 },
-                {
+				{
                     name: 'EAST',
-                    a: '东',
+                    a: '动',
+                    category: 'RADIO',
                     parent: '',
                     children: [],
                 },
-                {
+				{
                     name: 'SOUTH EAST',
                     a: '东南',
+                    category: 'RADIO',
                     parent: '',
                     children: [],
                 },
-                {
+				{
                     name: 'SOUTH',
                     a: '南',
+                    category: 'RADIO',
                     parent: '',
                     children: [],
                 },
-                {
+				{
                     name: 'SOUTH WEST',
                     a: '西南',
+                    category: 'RADIO',
                     parent: '',
                     children: [],
                 },
-                {
+				{
                     name: 'WEST',
                     a: '西',
+                    category: 'RADIO',
                     parent: '',
                     children: [],
                 },
-                {
+				{
                     name: 'NORTH WEST',
                     a: '西北',
+                    category: 'RADIO',
                     parent: '',
                     children: [],
                 },
-            ]
+			]
         },
-        {
+		{
             name: 'SET SPEED',
             a: '设置空速',
+            category: 'RADAR',
             parent: '',
             children: [
-                {
+				{
                     name: '-200 IAKTS',
                     a: '-200 节指示空速',
+                    category: 'RADIO',
                     parent: '',
                     children: [],
                 },
-                {
+				{
                     name: '-100 IAKTS',
                     a: '-100 节指示空速',
+                    category: 'RADIO',
                     parent: '',
                     children: [],
                 },
-                {
+				{
                     name: '-50 IAKTS',
                     a: '-50 节指示空速',
+                    category: 'RADIO',
                     parent: '',
                     children: [],
                 },
-                {
+				{
                     name: '+50 IAKTS',
                     a: '+50 节指示空速',
+                    category: 'RADIO',
                     parent: '',
                     children: [],
                 },
-                {
+				{
                     name: '+100 IAKTS',
                     a: '+100 节指示空速',
+                    category: 'RADIO',
                     parent: '',
                     children: [],
                 },
-                {
+				{
                     name: '+200 IAKTS',
                     a: '+200 节指示空速',
+                    category: 'RADIO',
                     parent: '',
                     children: [],
                 },
-            ]
+			]
         },
-        {
+		{
             name: ['SET ANGELS', 'RELATIVE'],
             a: ['设置', '相对高度'],
+            category: 'RADAR',
             parent: '',
             children: [
-                {
+				{
                     name: 'DESCEND 10000',
                     a: '下降 10000',
                     parent: '',
                     children: [],
                 },
-                {
+				{
                     name: 'DESCEND 5000',
                     a: '下降 5000',
                     parent: '',
                     children: [],
                 },
-                {
+				{
                     name: 'DESCEND 1000',
                     a: '下降 1000',
                     parent: '',
                     children: [],
                 },
-                {
+				{
                     name: 'DESCEND 500',
                     a: '下降 500',
                     parent: '',
                     children: [],
                 },
-                {
+				{
                     name: 'CLIMB 500',
                     a: '爬升 500',
                     parent: '',
                     children: [],
                 },
-                {
+				{
                     name: 'CLIMB 1000',
                     a: '爬升 1000',
                     parent: '',
                     children: [],
                 },
-                {
+				{
                     name: 'CLIMB 5000',
                     a: '爬升 5000',
                     parent: '',
                     children: [],
                 },
-                {
+				{
                     name: 'CLIMB 10000',
                     a: '爬升 10000',
                     parent: '',
                     children: [],
                 },
-            ]
+			]
         },
-        {
+		{
             name: ['SET ANGELS', 'ABSOLUTE'],
             a: ['设置', '绝对高度'],
+            category: 'RADAR',
             parent: '',
             children: [
-                {
+				{
                     name: 'ANGELS 1',
                     a: '1000 英尺',
                     parent: '',
                     children: [],
                 },
-                {
+				{
                     name: 'ANGELS 5',
                     a: '5000 英尺',
                     parent: '',
                     children: [],
                 },
-                {
+				{
                     name: 'ANGELS 10',
                     a: '10000 英尺',
                     parent: '',
                     children: [],
                 },
-                {
+				{
                     name: 'ANGELS 15',
                     a: '15000 英尺',
                     parent: '',
                     children: [],
                 },
-                {
+				{
                     name: 'ANGELS 20',
-                    a: '20000 英尺',
+                    a: 'ICEMAN子项目1',
                     parent: '',
                     children: [],
                 },
-                {
+				{
                     name: 'ANGELS 25',
                     a: '25000 英尺',
                     parent: '',
                     children: [],
                 },
-                {
+				{
                     name: 'ANGELS 30',
                     a: '30000 英尺',
                     parent: '',
                     children: [],
                 },
-                {
+				{
                     name: 'ANGELS 35',
                     a: '35000 英尺',
                     parent: '',
                     children: [],
                 },
-            ]
-        },
-        {
-            name: '_blank',
+			]
+		},	
+		{
+			name: [],
             a: [],
             parent: '',
             children: [],
         },
-        {
-            name: '_blank',
+		{
+			name: [],
             a: [],
             parent: '',
             children: [],
         },
-        {
-            name: 'HOLD CURRENT',
+		{
+			name: 'HOLE CURRENT',
             a: '保持当前',
             parent: '',
             children: [],
@@ -2110,17 +2172,6 @@ export default {
             sizeY: 50,
 
             color: '#3e8df0'
-        },
-        {
-            name: '',
-            value: 'https://www.flaticon.com/svg/static/icons/svg/2590/2590397.svg',
-
-            startX: 70,
-            startY: 7,
-            sizeX: 50,
-            sizeY: 50,
-
-            color: '#d8d8d8'
         },
     ],
 
