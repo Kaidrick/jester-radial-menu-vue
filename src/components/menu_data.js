@@ -420,8 +420,8 @@ export default {
                     ],
                 },
                 {
-                    name: 'SCAN DISTANCE',
-                    a: '扫描距离',
+                    name: 'TID RANGE',
+                    a: 'TID 显示距离',
                     category: 'RADAR',
                     parent: '',
                     children: [
@@ -470,21 +470,28 @@ export default {
                     ],
                 },
                 {
-                    name: 'RADAR MODE',
-                    a: '雷达模式',
+                    name: 'RADAR SETTING',
+                    a: '雷达设置',
                     category: 'RADAR',
                     parent: '',
                     children: [
                         {
                             name: 'AUTO',
-                            a: 'TWS-自动',
+                            a: '自动',
                             category: 'RADAR',
                             parent: '',
                             children: [],
                         },
                         {
-                            name: 'TRACK WHILE SCAN',
-                            a: '边扫描边跟踪',
+                            name: ['TRACK WHILE SCAN', 'AUTO'],
+                            a: ['边扫描边跟踪', '自动'],
+                            category: 'RADAR',
+                            parent: '',
+                            children: [],
+                        },
+                        {
+                            name: ['TRACK WHILE SCAN', 'MANUAL'],
+                            a: ['边扫描边跟踪', '手动'],
                             category: 'RADAR',
                             parent: '',
                             children: [],
@@ -496,11 +503,40 @@ export default {
                             parent: '',
                             children: [],
                         },
+                        {
+                            name: 'TARGET SIZE SWITCH',
+                            a: '目标大小开关',
+                            category: 'RADAR',
+                            parent: '',
+                            children: [
+                                {
+                                    name: 'NORMAL',
+                                    a: '正常大小',
+                                    category: 'RADAR',
+                                    parent: '',
+                                    children: [],
+                                },
+                                {
+                                    name: 'LARGE',
+                                    a: '大',
+                                    category: 'RADAR',
+                                    parent: '',
+                                    children: [],
+                                },
+                                {
+                                    name: 'SMALL',
+                                    a: '小',
+                                    category: 'RADAR',
+                                    parent: '',
+                                    children: [],
+                                },
+                            ],
+                        },
                     ],
                 },
                 {
-                    name: 'GROUND STABILIZE',
-                    a: '相对地面稳定',
+                    name: 'TID GROUND STABILIZE',
+                    a: 'TID 相对地面稳定',
                     category: 'RADAR',
                     parent: '',
                     children: [
@@ -1563,7 +1599,7 @@ export default {
                         },
                         {
                             name: ['AIRBORNE', 'INTERCEPTOR'],
-                            a: ['机载雷达'],
+                            a: ['机载截击雷达'],
                             category: 'DEFENSIVE',
                             parent: '',
                             children: [],
