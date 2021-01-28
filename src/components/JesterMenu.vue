@@ -17,8 +17,8 @@
                  @change="updateCanvas"
                  :active-value="true"
                  :inactive-value="false"
-                 :active-text="'中'"
-                 :inactive-text="'英'" />
+                 :active-text="'CN'"
+                 :inactive-text="'EN'" />
       <el-switch v-model="isIceman"
                  @change="selectAI"
                  :active-value="true"
