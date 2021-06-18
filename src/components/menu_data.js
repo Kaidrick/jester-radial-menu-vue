@@ -2102,49 +2102,153 @@ export default {
 							name: ['45 DEGREE ROLL', '5 NM DIAMETER', '400 TAKTS'],
 							a: ['坡度45度', '盘旋直径5海里', '400节真空速'],
 							parent: '',
-							children: [],
+							children: [
+								{
+									name: 'LEFT HAND TURN',
+									a: '左转盘旋',
+									parent: '',
+									children: [],
+								},
+								{
+									name: 'RIGHT HAND TURN',
+									a: '右转盘旋',
+									parent: '',
+									children: [],
+								},
+							],
 						},
 						{
 							name: ['45 DEGREE ROLL', '7 NM DIAMETER', '480 TAKTS'],
 							a: ['坡度45度', '盘旋直径7海里', '480节真空速'],
 							parent: '',
-							children: [],
+							children: [
+								{
+									name: 'LEFT HAND TURN',
+									a: '左转盘旋',
+									parent: '',
+									children: [],
+								},
+								{
+									name: 'RIGHT HAND TURN',
+									a: '右转盘旋',
+									parent: '',
+									children: [],
+								},
+							],
 						},
 						{
 							name: ['45 DEGREE ROLL', '10 NM DIAMETER', '600 TAKTS'],
 							a: ['坡度45度', '盘旋直径10海里', '600节真空速'],
 							parent: '',
-							children: [],
+							children: [
+								{
+									name: 'LEFT HAND TURN',
+									a: '左转盘旋',
+									parent: '',
+									children: [],
+								},
+								{
+									name: 'RIGHT HAND TURN',
+									a: '右转盘旋',
+									parent: '',
+									children: [],
+								},
+							],
 						},
 						{
 							name: ['30 DEGREE ROLL', '7 NM DIAMETER', '360 TAKTS'],
 							a: ['坡度30度', '盘旋直径7海里', '360节真空速'],
 							parent: '',
-							children: [],
+							children: [
+								{
+									name: 'LEFT HAND TURN',
+									a: '左转盘旋',
+									parent: '',
+									children: [],
+								},
+								{
+									name: 'RIGHT HAND TURN',
+									a: '右转盘旋',
+									parent: '',
+									children: [],
+								},
+							],
 						},
 						{
 							name: ['30 DEGREE ROLL', '10 NM DIAMETER', '450 TAKTS'],
 							a: ['坡度30度', '盘旋直径10海里', '450节真空速'],
 							parent: '',
-							children: [],
+							children: [
+								{
+									name: 'LEFT HAND TURN',
+									a: '左转盘旋',
+									parent: '',
+									children: [],
+								},
+								{
+									name: 'RIGHT HAND TURN',
+									a: '右转盘旋',
+									parent: '',
+									children: [],
+								},
+							],
 						},
 						{
 							name: ['30 DEGREE ROLL', '15 NM DIAMETER', '550 TAKTS'],
 							a: ['坡度30度', '盘旋直径15海里', '550节真空速'],
 							parent: '',
-							children: [],
+							children: [
+								{
+									name: 'LEFT HAND TURN',
+									a: '左转盘旋',
+									parent: '',
+									children: [],
+								},
+								{
+									name: 'RIGHT HAND TURN',
+									a: '右转盘旋',
+									parent: '',
+									children: [],
+								},
+							],
 						},
 						{
 							name: ['30 DEGREE ROLL', '20 NM DIAMETER', '620 TAKTS'],
 							a: ['坡度30度', '盘旋直径20海里', '620节真空速'],
 							parent: '',
-							children: [],
+							children: [
+								{
+									name: 'LEFT HAND TURN',
+									a: '左转盘旋',
+									parent: '',
+									children: [],
+								},
+								{
+									name: 'RIGHT HAND TURN',
+									a: '右转盘旋',
+									parent: '',
+									children: [],
+								},
+							],
 						},
 						{
 							name: ['30 DEGREE ROLL', '25 NM DIAMETER', '620 TAKTS'],
 							a: ['坡度30度', '盘旋直径25海里', '620节真空速'],
 							parent: '',
-							children: [],
+							children: [
+								{
+									name: 'LEFT HAND TURN',
+									a: '左转盘旋',
+									parent: '',
+									children: [],
+								},
+								{
+									name: 'RIGHT HAND TURN',
+									a: '右转盘旋',
+									parent: '',
+									children: [],
+								},
+							],
 						},
 					],
                 },
@@ -2158,7 +2262,20 @@ export default {
 							name: ['BULLSEYE', 'N 16NM', '1 MIN AGO'],
 							a: ['靶眼', '北 距离16海里', '1 分钟前建立'],
 							parent: '',
-							children: [],
+							children: [
+								{
+									name: 'LEFT HAND TURN',
+									a: '左转盘旋',
+									parent: '',
+									children: [],
+								},
+								{
+									name: 'RIGHT HAND TURN',
+									a: '右转盘旋',
+									parent: '',
+									children: [],
+								},
+							],
 						},
 					],
                 },
