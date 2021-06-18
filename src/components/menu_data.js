@@ -2080,7 +2080,7 @@ export default {
                     children: [],
                 },
 				{
-                    name: ['FLY TO MAP', 'MAKER']
+                    name: ['FLY TO MAP', 'MAKER'],
                     a: ['飞向', '地图标记点'],
 					category: 'UTILITY',
                     parent: '',
