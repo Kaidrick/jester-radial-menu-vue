@@ -530,6 +530,35 @@ export default {
                                     parent: '',
                                     children: [],
                                 },
+                            ]
+                        },
+                        {
+                            name: 'TARGET ASPECT SWITCH',
+                            a: '目标态势开关',
+                            category: 'RADAR',
+                            parent: '',
+                            children: [
+                                {
+                                    name: 'BEAM',
+                                    a: '侧对',
+                                    category: 'RADAR',
+                                    parent: '',
+                                    children: [],
+                                },
+                                {
+                                    name: 'NOSE',
+                                    a: '迎头',
+                                    category: 'RADAR',
+                                    parent: '',
+                                    children: [],
+                                },
+                                {
+                                    name: 'TAIL',
+                                    a: '尾追',
+                                    category: 'RADAR',
+                                    parent: '',
+                                    children: [],
+                                },
                             ],
                         },
                     ],
@@ -2073,215 +2102,215 @@ export default {
             a: ['飞向航路点', '盘旋点'],
             parent: '',
             children: [
-				{
+                {
                     name: ['FLY TO DESTINATION', 'STEER POINT'],
                     a: ['飞向', '目标'],
                     parent: '',
                     children: [],
                 },
-				{
+                {
                     name: ['FLY TO MAP', 'MAKER'],
                     a: ['飞向', '地图标记点'],
-					category: 'UTILITY',
+                    category: 'UTILITY',
                     parent: '',
                     children: [
-						{
-							name: ['BULLSEYE', 'NNW 15NM', '20 SEC AGO'],
-							a: ['靶眼', '西北偏北 距离15海里', '20 秒前建立'],
-							parent: '',
-							children: [],
-						},		
-					],
+                        {
+                            name: ['BULLSEYE', 'NNW 15NM', '20 SEC AGO'],
+                            a: ['靶眼', '西北偏北 距离15海里', '20 秒前建立'],
+                            parent: '',
+                            children: [],
+                        },
+                    ],
                 },
-				{
+                {
                     name: ['ORBIT DESTINATION', 'STEER POINT'],
                     a: ['在目标', '盘旋'],
                     parent: '',
                     children: [
-						{
-							name: ['45 DEGREE ROLL', '5 NM DIAMETER', '400 TAKTS'],
-							a: ['坡度45度', '盘旋直径5海里', '400节真空速'],
-							parent: '',
-							children: [
-								{
-									name: 'LEFT HAND TURN',
-									a: '左转盘旋',
-									parent: '',
-									children: [],
-								},
-								{
-									name: 'RIGHT HAND TURN',
-									a: '右转盘旋',
-									parent: '',
-									children: [],
-								},
-							],
-						},
-						{
-							name: ['45 DEGREE ROLL', '7 NM DIAMETER', '480 TAKTS'],
-							a: ['坡度45度', '盘旋直径7海里', '480节真空速'],
-							parent: '',
-							children: [
-								{
-									name: 'LEFT HAND TURN',
-									a: '左转盘旋',
-									parent: '',
-									children: [],
-								},
-								{
-									name: 'RIGHT HAND TURN',
-									a: '右转盘旋',
-									parent: '',
-									children: [],
-								},
-							],
-						},
-						{
-							name: ['45 DEGREE ROLL', '10 NM DIAMETER', '600 TAKTS'],
-							a: ['坡度45度', '盘旋直径10海里', '600节真空速'],
-							parent: '',
-							children: [
-								{
-									name: 'LEFT HAND TURN',
-									a: '左转盘旋',
-									parent: '',
-									children: [],
-								},
-								{
-									name: 'RIGHT HAND TURN',
-									a: '右转盘旋',
-									parent: '',
-									children: [],
-								},
-							],
-						},
-						{
-							name: ['30 DEGREE ROLL', '7 NM DIAMETER', '360 TAKTS'],
-							a: ['坡度30度', '盘旋直径7海里', '360节真空速'],
-							parent: '',
-							children: [
-								{
-									name: 'LEFT HAND TURN',
-									a: '左转盘旋',
-									parent: '',
-									children: [],
-								},
-								{
-									name: 'RIGHT HAND TURN',
-									a: '右转盘旋',
-									parent: '',
-									children: [],
-								},
-							],
-						},
-						{
-							name: ['30 DEGREE ROLL', '10 NM DIAMETER', '450 TAKTS'],
-							a: ['坡度30度', '盘旋直径10海里', '450节真空速'],
-							parent: '',
-							children: [
-								{
-									name: 'LEFT HAND TURN',
-									a: '左转盘旋',
-									parent: '',
-									children: [],
-								},
-								{
-									name: 'RIGHT HAND TURN',
-									a: '右转盘旋',
-									parent: '',
-									children: [],
-								},
-							],
-						},
-						{
-							name: ['30 DEGREE ROLL', '15 NM DIAMETER', '550 TAKTS'],
-							a: ['坡度30度', '盘旋直径15海里', '550节真空速'],
-							parent: '',
-							children: [
-								{
-									name: 'LEFT HAND TURN',
-									a: '左转盘旋',
-									parent: '',
-									children: [],
-								},
-								{
-									name: 'RIGHT HAND TURN',
-									a: '右转盘旋',
-									parent: '',
-									children: [],
-								},
-							],
-						},
-						{
-							name: ['30 DEGREE ROLL', '20 NM DIAMETER', '620 TAKTS'],
-							a: ['坡度30度', '盘旋直径20海里', '620节真空速'],
-							parent: '',
-							children: [
-								{
-									name: 'LEFT HAND TURN',
-									a: '左转盘旋',
-									parent: '',
-									children: [],
-								},
-								{
-									name: 'RIGHT HAND TURN',
-									a: '右转盘旋',
-									parent: '',
-									children: [],
-								},
-							],
-						},
-						{
-							name: ['30 DEGREE ROLL', '25 NM DIAMETER', '620 TAKTS'],
-							a: ['坡度30度', '盘旋直径25海里', '620节真空速'],
-							parent: '',
-							children: [
-								{
-									name: 'LEFT HAND TURN',
-									a: '左转盘旋',
-									parent: '',
-									children: [],
-								},
-								{
-									name: 'RIGHT HAND TURN',
-									a: '右转盘旋',
-									parent: '',
-									children: [],
-								},
-							],
-						},
-					],
+                        {
+                            name: ['45 DEGREE ROLL', '5 NM DIAMETER', '400 TAKTS'],
+                            a: ['坡度45度', '盘旋直径5海里', '400节真空速'],
+                            parent: '',
+                            children: [
+                                {
+                                    name: 'LEFT HAND TURN',
+                                    a: '左转盘旋',
+                                    parent: '',
+                                    children: [],
+                                },
+                                {
+                                    name: 'RIGHT HAND TURN',
+                                    a: '右转盘旋',
+                                    parent: '',
+                                    children: [],
+                                },
+                            ],
+                        },
+                        {
+                            name: ['45 DEGREE ROLL', '7 NM DIAMETER', '480 TAKTS'],
+                            a: ['坡度45度', '盘旋直径7海里', '480节真空速'],
+                            parent: '',
+                            children: [
+                                {
+                                    name: 'LEFT HAND TURN',
+                                    a: '左转盘旋',
+                                    parent: '',
+                                    children: [],
+                                },
+                                {
+                                    name: 'RIGHT HAND TURN',
+                                    a: '右转盘旋',
+                                    parent: '',
+                                    children: [],
+                                },
+                            ],
+                        },
+                        {
+                            name: ['45 DEGREE ROLL', '10 NM DIAMETER', '600 TAKTS'],
+                            a: ['坡度45度', '盘旋直径10海里', '600节真空速'],
+                            parent: '',
+                            children: [
+                                {
+                                    name: 'LEFT HAND TURN',
+                                    a: '左转盘旋',
+                                    parent: '',
+                                    children: [],
+                                },
+                                {
+                                    name: 'RIGHT HAND TURN',
+                                    a: '右转盘旋',
+                                    parent: '',
+                                    children: [],
+                                },
+                            ],
+                        },
+                        {
+                            name: ['30 DEGREE ROLL', '7 NM DIAMETER', '360 TAKTS'],
+                            a: ['坡度30度', '盘旋直径7海里', '360节真空速'],
+                            parent: '',
+                            children: [
+                                {
+                                    name: 'LEFT HAND TURN',
+                                    a: '左转盘旋',
+                                    parent: '',
+                                    children: [],
+                                },
+                                {
+                                    name: 'RIGHT HAND TURN',
+                                    a: '右转盘旋',
+                                    parent: '',
+                                    children: [],
+                                },
+                            ],
+                        },
+                        {
+                            name: ['30 DEGREE ROLL', '10 NM DIAMETER', '450 TAKTS'],
+                            a: ['坡度30度', '盘旋直径10海里', '450节真空速'],
+                            parent: '',
+                            children: [
+                                {
+                                    name: 'LEFT HAND TURN',
+                                    a: '左转盘旋',
+                                    parent: '',
+                                    children: [],
+                                },
+                                {
+                                    name: 'RIGHT HAND TURN',
+                                    a: '右转盘旋',
+                                    parent: '',
+                                    children: [],
+                                },
+                            ],
+                        },
+                        {
+                            name: ['30 DEGREE ROLL', '15 NM DIAMETER', '550 TAKTS'],
+                            a: ['坡度30度', '盘旋直径15海里', '550节真空速'],
+                            parent: '',
+                            children: [
+                                {
+                                    name: 'LEFT HAND TURN',
+                                    a: '左转盘旋',
+                                    parent: '',
+                                    children: [],
+                                },
+                                {
+                                    name: 'RIGHT HAND TURN',
+                                    a: '右转盘旋',
+                                    parent: '',
+                                    children: [],
+                                },
+                            ],
+                        },
+                        {
+                            name: ['30 DEGREE ROLL', '20 NM DIAMETER', '620 TAKTS'],
+                            a: ['坡度30度', '盘旋直径20海里', '620节真空速'],
+                            parent: '',
+                            children: [
+                                {
+                                    name: 'LEFT HAND TURN',
+                                    a: '左转盘旋',
+                                    parent: '',
+                                    children: [],
+                                },
+                                {
+                                    name: 'RIGHT HAND TURN',
+                                    a: '右转盘旋',
+                                    parent: '',
+                                    children: [],
+                                },
+                            ],
+                        },
+                        {
+                            name: ['30 DEGREE ROLL', '25 NM DIAMETER', '620 TAKTS'],
+                            a: ['坡度30度', '盘旋直径25海里', '620节真空速'],
+                            parent: '',
+                            children: [
+                                {
+                                    name: 'LEFT HAND TURN',
+                                    a: '左转盘旋',
+                                    parent: '',
+                                    children: [],
+                                },
+                                {
+                                    name: 'RIGHT HAND TURN',
+                                    a: '右转盘旋',
+                                    parent: '',
+                                    children: [],
+                                },
+                            ],
+                        },
+                    ],
                 },
-				{
+                {
                     name: ['ORBIT MAP', 'MAKER'],
                     a: ['在地图标记点', '盘旋'],
-					category: 'UTILITY',
+                    category: 'UTILITY',
                     parent: '',
                     children: [
-						{
-							name: ['BULLSEYE', 'N 16NM', '1 MIN AGO'],
-							a: ['靶眼', '北 距离16海里', '1 分钟前建立'],
-							parent: '',
-							children: [
-								{
-									name: 'LEFT HAND TURN',
-									a: '左转盘旋',
-									parent: '',
-									children: [],
-								},
-								{
-									name: 'RIGHT HAND TURN',
-									a: '右转盘旋',
-									parent: '',
-									children: [],
-								},
-							],
-						},
-					],
+                        {
+                            name: ['BULLSEYE', 'N 16NM', '1 MIN AGO'],
+                            a: ['靶眼', '北 距离16海里', '1 分钟前建立'],
+                            parent: '',
+                            children: [
+                                {
+                                    name: 'LEFT HAND TURN',
+                                    a: '左转盘旋',
+                                    parent: '',
+                                    children: [],
+                                },
+                                {
+                                    name: 'RIGHT HAND TURN',
+                                    a: '右转盘旋',
+                                    parent: '',
+                                    children: [],
+                                },
+                            ],
+                        },
+                    ],
                 },
-			],
+            ],
         },
-		{
+        {
             name: 'HOLD CURRENT',
             a: '保持当前',
             parent: '',
