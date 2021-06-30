@@ -2310,10 +2310,10 @@ export default {
             name: '',
             value: 'https://www.flaticon.com/svg/static/icons/svg/2590/2590397.svg',
 
-            startX: 70,
-            startY: 7,
-            sizeX: 50,
-            sizeY: 50,
+            startX: 0,
+            startY: 0,
+            sizeX: 0,
+            sizeY: 0,
 
             color: '#d8d8d8'
         },

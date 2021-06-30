@@ -228,9 +228,9 @@ export default {
               let category = this.currentMenu[index].category || '';
               let crop = menu_data.categories.find(f => f.name === category.toLowerCase());
 
-              if (!this.isIceman) {
+              // if (!this.isIceman) {
                 this.ctx.drawImage(image, crop.startX, crop.startY, crop.sizeX, crop.sizeY, refX - 24, startY - 48, 48, 48);
-              }
+              // }
 
               this.currentMenu[index].a.forEach(line => {
                 this.ctx.fillText(line, refX, startY += 20);
@@ -250,9 +250,9 @@ export default {
               let category = this.currentMenu[index].category || '';
               let crop = menu_data.categories.find(f => f.name === category.toLowerCase());
 
-              if (!this.isIceman) {
+              // if (!this.isIceman) {
                 this.ctx.drawImage(image, crop.startX, crop.startY, crop.sizeX, crop.sizeY, refX - 24, refY - 58, 48, 48);
-              }
+              // }
 
 
 
@@ -277,9 +277,9 @@ export default {
               let category = this.currentMenu[index].category || '';
               let crop = menu_data.categories.find(f => f.name === category.toLowerCase());
 
-              if (!this.isIceman) {
+              // if (!this.isIceman) {
                 this.ctx.drawImage(image, crop.startX, crop.startY, crop.sizeX, crop.sizeY, refX - 24, startY - 48, 48, 48);
-              }
+              // }
 
               this.currentMenu[index].name.forEach(line => {
                 this.ctx.fillText(line, refX, startY += 20);
@@ -298,9 +298,9 @@ export default {
               let category = this.currentMenu[index].category || '';
               let crop = menu_data.categories.find(f => f.name === category.toLowerCase());
 
-              if (!this.isIceman) {
+              // if (!this.isIceman) {
                 this.ctx.drawImage(image, crop.startX, crop.startY, crop.sizeX, crop.sizeY, refX - 24, refY - 58, 48, 48);
-              }
+              // }
 
 
               this.ctx.fillText(this.currentMenu[index].name, refX, refY + 10);
