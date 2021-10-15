@@ -28,7 +28,7 @@ jobs:
         # Your username
         username: kaidrick
         # Your reponame
-        reponame: Kaidrick/jester-radial-menu-vue
+        reponame: jester-radial-menu-vue
         # Your Github token
         token: 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
         
