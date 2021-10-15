@@ -644,14 +644,14 @@ export default {
                     children: [
                         {
                             name: ['GBU-16', 'X2'],
-                            a: ['计算机目标'],
+                            a: ['GBU-16', 'X2'],
                             category: 'WEAPONS',
                             parent: '',
                             children: [],
                         },
                         {
                             name: ['GBU-24', 'X2'],
-                            a: ['计算机目标'],
+                            a: ['GBU-24', 'X2'],
                             category: 'WEAPONS',
                             parent: '',
                             children: [],
@@ -812,7 +812,7 @@ export default {
                 {
                     name: 'USE LANTIRN',
                     a: '使用蓝盾',
-                    category: 'WEAPONS',
+                    category: 'UTILITY',
                     parent: '',
                     children: [
                         {
@@ -880,7 +880,7 @@ export default {
                                         {
                                             name: 'QWP3',
                                             a: 'Q 3号航路点',
-                                            category: 'UTILITYS',
+                                            category: 'UTILITY',
                                             parent: '',
                                             children: [],
                                         },
